@@ -49,8 +49,19 @@ public class GameManager : MonoBehaviour {
 			if (gameOver) {
 				saveHighScore();
 				previousScore = (int)score;
-				if(Input.anyKey){
-					Application.LoadLevel(titleScreenName);
+
+
+				if(!IsMobile()){
+					if(Input.anyKeyDown){
+						Application.LoadLevel(titleScreenName);
+					}
+				}
+				else{
+					foreach(Touch touch in Input.touches){
+						if(touch.phase == TouchPhase.Began){
+							Application.LoadLevel(titleScreenName);
+						}
+					}
 				}
 			}
 			if (!gameOver) {
@@ -90,6 +101,18 @@ public class GameManager : MonoBehaviour {
 			if (gameOver) {
 				GUILayout.Label("Game Over! Press any key to quit!");		
 			}
+		}
+	}
+
+	public static bool IsMobile(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer ||
+		   Application.platform == RuntimePlatform.Android ||
+		   Application.platform == RuntimePlatform.BlackBerryPlayer ||
+		   Application.platform == RuntimePlatform.MetroPlayerARM){
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
 }

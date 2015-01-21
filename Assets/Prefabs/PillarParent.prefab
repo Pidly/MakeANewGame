@@ -30,8 +30,8 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
-  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: PillarParent
   m_TagString: Untagged
@@ -139,10 +139,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2bb1a32af1ad44b85ce0152ed26e72, type: 3}
+  m_Script: {fileID: 11500000, guid: 001491cf6bbb9be498ea557b09af156c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -10
+  speed: 10
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
