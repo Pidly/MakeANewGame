@@ -18,11 +18,6 @@ public class PseudoInput : MonoBehaviour {
 	private static PseudoInput _instance;
 	public bool leftPressed = false;
 	public bool rightPressed = false;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
