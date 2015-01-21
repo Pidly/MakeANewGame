@@ -13,5 +13,12 @@ public class PseudoMoveLeftAndRight : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		renderer.material.mainTextureOffset += Vector2.right * Input.GetAxis ("Horizontal") * speed * Time.deltaTime;
+
+		if (PseudoInput.Instance.leftPressed) {
+			renderer.material.mainTextureOffset += -Vector2.right*speed*Time.deltaTime;		
+		}
+		if (PseudoInput.Instance.rightPressed) {
+			renderer.material.mainTextureOffset += Vector2.right*speed*Time.deltaTime;		
+		}
 	}
 }
