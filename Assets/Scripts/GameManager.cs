@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
@@ -19,12 +20,16 @@ public class GameManager : MonoBehaviour {
 	public string titleScreenName = "TitleScreen";
 	public string highScoresScreenName = "HighScores";
 
+	private bool hasSaved = false;
+
 	[HideInInspector]
 	public int previousScore = 0;
 
 	private float score = 0.0f;
 	private static float highScore = 0.0f;
-	private bool hasSaved = false;
+
+	private List<int> highScorez = new List<int>();
+
 	private bool gameOver = false;
 
 	// Use this for initialization
@@ -48,9 +53,12 @@ public class GameManager : MonoBehaviour {
 			}
 
 			if (gameOver) {
-				saveHighScore();
-				previousScore = (int)score;
-
+				if(!hasSaved)
+				{
+					saveHighScore();
+					previousScore = (int)score;
+					hasSaved = true;
+				}
 
 				if(!IsMobile()){
 					if(Input.anyKeyDown){
@@ -81,15 +89,52 @@ public class GameManager : MonoBehaviour {
 	void resetGame(){
 		score = 0.0f;
 		gameOver = false;
+		hasSaved = false;
 	}
 
 	void saveHighScore(){
-		PlayerPrefs.SetInt ("HighScore", (int)highScore);
+		highScorez.Add((int)this.score);
+		highScorez.Sort();
+
+		Debug.Log ("High Score: " + (int)this.score);
+		Debug.Log ("Full score list:");
+		foreach (int currentScore in highScorez){
+			Debug.Log("Score: " + currentScore);
+		}
+		//int highSlot = -1;
+		int scoreIndex = 0;
+		for(int i = highScorez.Count-1; i > 0; i--) {
+			//Debug.Log("Scores: " + highScorez[i]);
+			PlayerPrefs.SetInt("HighScore"+scoreIndex.ToString(), (int)(highScorez[i]));
+			scoreIndex++;
+		}
+
+		while (highScorez.Count > 5) {
+			highScorez.RemoveAt(0);		
+		}
+		/*
+		if (highScorez.Count > 5) {
+			int difference = highScorez.Count - 5;
+			highScorez.RemoveRange(5, difference);
+		}
+		*/
+
 		PlayerPrefs.Save();
 	}
 
 	void loadHighScore(){
-		highScore = PlayerPrefs.GetInt ("HighScore");
+		int count = 0;
+		while (highScorez.Count < 5) {
+			highScorez.Add(0);	
+			count++;
+			if(count >= 5)
+				break;
+		}
+
+		for(int i = 0; i < highScorez.Count; i++) {
+			highScorez[i] = PlayerPrefs.GetInt("HighScore"+i.ToString());
+			//highScorez.Insert(i, (PlayerPrefs.GetInt("HighScore"+i.ToString())));
+		}
 	}
 
 	void OnGUI(){

@@ -315,6 +315,7 @@ MonoBehaviour:
   pointsPerUnitTravelled: 1
   gameSpeed: 10
   titleScreenName: TitleScreen
+  highScoresScreenName: HighScores
   previousScore: 0
 --- !u!4 &361565053
 Transform:
