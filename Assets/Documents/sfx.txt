@@ -1,0 +1,6 @@
+SFX Stuff;
+	Playerdeath
+	Moving left/right
+	moving forwards(?)
+	player spawning(?)
+	pillar whoosh

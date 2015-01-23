@@ -96,15 +96,8 @@ public class GameManager : MonoBehaviour {
 		highScorez.Add((int)this.score);
 		highScorez.Sort();
 
-		Debug.Log ("High Score: " + (int)this.score);
-		Debug.Log ("Full score list:");
-		foreach (int currentScore in highScorez){
-			Debug.Log("Score: " + currentScore);
-		}
-		//int highSlot = -1;
 		int scoreIndex = 0;
 		for(int i = highScorez.Count-1; i > 0; i--) {
-			//Debug.Log("Scores: " + highScorez[i]);
 			PlayerPrefs.SetInt("HighScore"+scoreIndex.ToString(), (int)(highScorez[i]));
 			scoreIndex++;
 		}
@@ -112,12 +105,6 @@ public class GameManager : MonoBehaviour {
 		while (highScorez.Count > 5) {
 			highScorez.RemoveAt(0);		
 		}
-		/*
-		if (highScorez.Count > 5) {
-			int difference = highScorez.Count - 5;
-			highScorez.RemoveRange(5, difference);
-		}
-		*/
 
 		PlayerPrefs.Save();
 	}
